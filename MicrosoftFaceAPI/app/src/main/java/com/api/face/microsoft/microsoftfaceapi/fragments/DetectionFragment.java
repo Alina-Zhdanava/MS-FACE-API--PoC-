@@ -4,11 +4,12 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +17,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.api.face.microsoft.microsoftfaceapi.ImageResultReceiver;
 import com.api.face.microsoft.microsoftfaceapi.R;
-import com.api.face.microsoft.microsoftfaceapi.helper.ImageHelper;
-import com.microsoft.projectoxford.face.FaceServiceClient;
-import com.microsoft.projectoxford.face.FaceServiceRestClient;
+import com.api.face.microsoft.microsoftfaceapi.tasks.ImageHelper;
+import com.bumptech.glide.Glide;
 import com.microsoft.projectoxford.face.contract.Face;
+
+import java.util.concurrent.ExecutionException;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -39,7 +40,6 @@ public class DetectionFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -64,7 +64,6 @@ public class DetectionFragment extends Fragment implements View.OnClickListener 
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
         startActivityForResult(i, UPLOAD_IMAGE);
-
     }
 
 
@@ -83,34 +82,9 @@ public class DetectionFragment extends Fragment implements View.OnClickListener 
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
-
-            Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
-            imageView.setImageBitmap(bitmap);
-            new DetectionTask().execute(bitmap);
-        }
-    }
-
-    private class DetectionTask extends AsyncTask<Bitmap, Void, Face[]> {
-
-        Bitmap bitmap;
-
-        @Override
-        protected Face[] doInBackground(Bitmap... params) {
-            return ImageHelper.detect(params[0]);
-        }
-
-        @Override
-        protected void onPreExecute() {
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... progress) {
-        }
-
-        @Override
-        protected void onPostExecute(Face[] result) {
-
-            imageView.setImageBitmap(ImageHelper.drawFaceRectanglesOnBitmap(bitmap, result));
+            Glide.with(getActivity()).load(picturePath).override(500, 500).into(imageView);
+            Face[] result = ImageHelper.detectIImagePath(picturePath);
+            imageView.setImageBitmap(ImageHelper.drawFaceRectanglesOnBitmap(((BitmapDrawable)imageView.getDrawable()).getBitmap(), result));
 
             String face_description = "Age: " + (result[0].faceAttributes.age) + "\n"
                     + "Gender: " + result[0].faceAttributes.gender + "\n"
@@ -120,7 +94,6 @@ public class DetectionFragment extends Fragment implements View.OnClickListener 
                     + "Smile: " + result[0].faceAttributes.smile;
 
             resultText.setText(face_description);
-
         }
     }
 }
