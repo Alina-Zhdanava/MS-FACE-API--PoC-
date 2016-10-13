@@ -1,10 +1,7 @@
 package com.api.face.microsoft.microsoftfaceapi.activities;
 
-import android.content.DialogInterface;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,13 +13,10 @@ import android.widget.TextView;
 
 import com.api.face.microsoft.microsoftfaceapi.R;
 import com.api.face.microsoft.microsoftfaceapi.adapters.GroupListAdapter;
-import com.api.face.microsoft.microsoftfaceapi.helper.ImageHelper;
+import com.api.face.microsoft.microsoftfaceapi.tasks.ImageHelper;
 import com.microsoft.projectoxford.face.contract.PersonGroup;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class GroupListActivity extends AppCompatActivity implements View.OnClickListener {
 

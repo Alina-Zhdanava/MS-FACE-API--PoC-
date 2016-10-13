@@ -11,26 +11,22 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".activities.StartActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".activities.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.api.face.microsoft.microsoftfaceapi.activities.GroupListActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name="com.api.face.microsoft.microsoftfaceapi.activities.GroupListActivity"></activity>
 
         <activity
-            android:name="com.api.face.microsoft.microsoftfaceapi.activities.PersonListActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name="com.api.face.microsoft.microsoftfaceapi.activities.PersonListActivity"></activity>
 
         <activity
-            android:name="com.api.face.microsoft.microsoftfaceapi.activities.FaceListActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name="com.api.face.microsoft.microsoftfaceapi.activities.FaceListActivity"></activity>
 
         <service
             android:name=".ImageLoadService"

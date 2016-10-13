@@ -19,7 +19,7 @@ import android.widget.FrameLayout;
 import com.api.face.microsoft.microsoftfaceapi.R;
 import com.api.face.microsoft.microsoftfaceapi.fragments.DetectionFragment;
 import com.api.face.microsoft.microsoftfaceapi.fragments.IdentificationFragment;
-import com.api.face.microsoft.microsoftfaceapi.helper.ImageHelper;
+import com.api.face.microsoft.microsoftfaceapi.tasks.ImageHelper;
 
 public class StartActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

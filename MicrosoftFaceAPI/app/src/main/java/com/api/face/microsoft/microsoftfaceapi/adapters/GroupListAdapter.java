@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.api.face.microsoft.microsoftfaceapi.activities.PersonListActivity;
 import com.api.face.microsoft.microsoftfaceapi.R;
-import com.api.face.microsoft.microsoftfaceapi.helper.ImageHelper;
+import com.api.face.microsoft.microsoftfaceapi.tasks.ImageHelper;
 import com.microsoft.projectoxford.face.contract.PersonGroup;
 import com.microsoft.projectoxford.face.contract.TrainingStatus;
 

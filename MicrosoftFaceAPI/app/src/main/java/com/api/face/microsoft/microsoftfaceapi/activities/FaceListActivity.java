@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import com.api.face.microsoft.microsoftfaceapi.R;
 import com.api.face.microsoft.microsoftfaceapi.adapters.ImageAdapter;
-import com.api.face.microsoft.microsoftfaceapi.helper.ImageHelper;
+import com.api.face.microsoft.microsoftfaceapi.tasks.ImageHelper;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,7 +102,7 @@ public class FaceListActivity extends AppCompatActivity implements View.OnClickL
 
         @Override
         protected Void doInBackground(String... params) {
-            ImageHelper.createPerson(params[0], params[1], params[2]);
+            //ImageHelper.createPerson(params[0], params[1], params[2]);
             return null;
         }
 

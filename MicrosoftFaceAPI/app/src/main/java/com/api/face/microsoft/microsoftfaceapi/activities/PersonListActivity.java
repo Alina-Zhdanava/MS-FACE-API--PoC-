@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -18,13 +17,12 @@ import android.widget.TextView;
 
 import com.api.face.microsoft.microsoftfaceapi.R;
 import com.api.face.microsoft.microsoftfaceapi.adapters.PersonListAdapter;
-import com.api.face.microsoft.microsoftfaceapi.helper.ImageHelper;
+import com.api.face.microsoft.microsoftfaceapi.tasks.ImageHelper;
 import com.microsoft.projectoxford.face.contract.Person;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class PersonListActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -130,7 +128,7 @@ public class PersonListActivity extends AppCompatActivity implements View.OnClic
 
         @Override
         protected Void doInBackground(String... params) {
-            ImageHelper.createPerson(params[0], params[1], params[2]);
+         //   ImageHelper.createPerson(params[0], params[1], params[2]);
             return null;
         }
 

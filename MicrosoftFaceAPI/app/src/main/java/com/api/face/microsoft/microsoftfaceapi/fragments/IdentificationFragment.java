@@ -18,7 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.api.face.microsoft.microsoftfaceapi.activities.GroupListActivity;
 import com.api.face.microsoft.microsoftfaceapi.R;
-import com.api.face.microsoft.microsoftfaceapi.helper.ImageHelper;
+import com.api.face.microsoft.microsoftfaceapi.tasks.ImageHelper;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -107,7 +107,8 @@ public class IdentificationFragment extends Fragment implements View.OnClickList
 //
         protected String doInBackground(String... params) {
 
-            return ImageHelper.identify(params[0]);
+          //  return ImageHelper.identify(params[0]);
+            return null;
         }
 
         @Override
