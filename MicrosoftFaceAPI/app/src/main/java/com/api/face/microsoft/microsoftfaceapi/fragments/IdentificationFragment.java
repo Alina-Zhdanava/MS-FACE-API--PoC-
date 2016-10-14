@@ -18,11 +18,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.api.face.microsoft.microsoftfaceapi.activities.GroupListActivity;
 import com.api.face.microsoft.microsoftfaceapi.R;
+import com.api.face.microsoft.microsoftfaceapi.tasks.DeleteAllTaskListener;
 import com.api.face.microsoft.microsoftfaceapi.tasks.ImageHelper;
 
 import static android.app.Activity.RESULT_OK;
 
-public class IdentificationFragment extends Fragment implements View.OnClickListener {
+public class IdentificationFragment extends Fragment implements View.OnClickListener , DeleteAllTaskListener {
 
     private ImageView imageView;
     private TextView resultText;
@@ -102,6 +103,11 @@ public class IdentificationFragment extends Fragment implements View.OnClickList
         }
     }
 
+    @Override
+    public void onFinish(boolean flag) {
+
+    }
+
     private class IdentificationTask extends AsyncTask<String, Void, String> {
         // String imagePath - params[0]
 //
@@ -118,11 +124,23 @@ public class IdentificationFragment extends Fragment implements View.OnClickList
         }
     }
 
+    private class MyDeleteAllTaskListener implements DeleteAllTaskListener {
+
+        @Override
+        public void onFinish(boolean flag) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                }
+            });
+        }
+    }
     private class DeleteAllGroupsTask extends AsyncTask<String, Void, Void> {
         // String imagePath - params[0]
 //
         protected Void doInBackground(String... params) {
-            ImageHelper.deleteAll();
+            ImageHelper.deleteAll(new MyDeleteAllTaskListener());
             return null;
         }
 

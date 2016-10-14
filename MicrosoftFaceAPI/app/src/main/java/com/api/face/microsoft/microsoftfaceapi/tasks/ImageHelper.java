@@ -46,7 +46,7 @@ public class ImageHelper {
         if (faceServiceClient == null) {
             this.context = context;
             faceServiceClient = new FaceServiceRestClient(context.getString(R.string.subscription_key));//package-private
-            executor = Executors.newFixedThreadPool(1);
+            executor = Executors.newSingleThreadExecutor();
             DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
             mDpHeight = (int) (displayMetrics.heightPixels / displayMetrics.density);
             mDpWidth = (int) (displayMetrics.widthPixels / (displayMetrics.density));
@@ -56,7 +56,9 @@ public class ImageHelper {
     public ImageHelper() {
     }
 
-    public static boolean deleteAll() {
+    public static boolean deleteAll(DeleteAllTaskListener listener) {
+        executor.execute(new DeleteAllTask(listener));
+/*
         Callable callable = new DeleteAll();
         FutureTask<Boolean> task = new FutureTask<Boolean>(callable);
         executor.execute(task);
@@ -65,6 +67,7 @@ public class ImageHelper {
             System.out.println("Task is not completed yet....");
         }
         return true;
+*/
     }
 
     public static Face[] detectImage(Bitmap bitmap) {
@@ -87,7 +90,7 @@ public class ImageHelper {
                   Callable callable = new DetectImagePath(imagePath,context,mDpWidth,mDpHeight);
                 FutureTask<Face[]> task = new FutureTask<Face[]>(callable);
                 executor.execute(task);
-                task.get();
+               return task.get();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
